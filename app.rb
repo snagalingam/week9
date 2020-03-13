@@ -1,5 +1,5 @@
 # Set up for the application and database. DO NOT CHANGE. #############################
-require "sinatra"  
+require "sinatra"
 require "sinatra/cookies"                                                             #
 require "sinatra/reloader" if development?                                            #
 require "sequel"                                                                      #
@@ -46,6 +46,17 @@ end
 get "/events/:id/rsvps/create" do
     puts "params: #{params}"
 
+    # find the event that I am rsvp'ing extend Forwardable
+    @event = events_table.where(id: params[:id]).to_a[0]
+
+    #next we want to insert a row in the rsvp table with the rsvp form databaser
+    rsvps_table.insert(
+      event_id: @event[:id],
+      name: params["name"],
+      email: params["email"],
+      comments: params["comments"],
+      going: params["going"]
+    )
     view "create_rsvp"
 end
 
@@ -65,7 +76,7 @@ end
 
 get "/logins/create" do
     puts "params: #{params}"
- 
+
     view "create_login"
 end
 

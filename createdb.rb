@@ -21,6 +21,7 @@ DB.create_table! :rsvps do
   String :comments, text: true
 end
 
+puts "Success!"
 # New domain model - adds users
 # DB.create_table! :events do
 #   primary_key :id
@@ -46,12 +47,12 @@ end
 # Insert initial (seed) data
 events_table = DB.from(:events)
 
-events_table.insert(title: "Bacon Burger Taco Fest", 
+events_table.insert(title: "Bacon Burger Taco Fest",
                     description: "Here we go again bacon burger taco fans, another Bacon Burger Taco Fest is here!",
                     date: "June 21",
                     location: "Kellogg Global Hub")
 
-events_table.insert(title: "Kaleapolooza", 
+events_table.insert(title: "Kaleapolooza",
                     description: "If you're into nutrition and vitamins and stuff, this is the event for you.",
                     date: "July 4",
                     location: "Nowhere")
